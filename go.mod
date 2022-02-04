@@ -1,4 +1,4 @@
-module Webhooks
+module github.com/f1w/Webhooks
 
 go 1.16
 
