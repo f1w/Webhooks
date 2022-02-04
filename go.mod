@@ -1,4 +1,4 @@
-module WebhookHelper
+module Webhooks
 
 go 1.16
 
