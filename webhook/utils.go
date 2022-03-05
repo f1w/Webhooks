@@ -44,6 +44,13 @@ func (s *Session) MakeRequest(method string, endpoint string, Body []byte) (*htt
 	}
 
 	if res.StatusCode < 200 || res.StatusCode > 299 {
+		if res.StatusCode == http.StatusTooManyRequests {
+			rateLimitPayload := struct{
+				RetryAfter float64 `json:"retry_after"`
+			}{}
+			time.Sleep(time.Duration(int(math.Ceil(rateLimitPayload.RetryAfter))) * time.Second)
+			return s.MakeRequest(method, endpoint, Body)
+		}
 		errResp, readErr := ioutil.ReadAll(res.Body)
 
 		if readErr != nil {
