@@ -6,10 +6,12 @@ import (
 	"net/http"
 )
 
+
 type Session struct {
 	httpClient *http.Client
 	Token string
 }
+
 
 func Connect(token string) *Session {
 	return &Session{
@@ -41,7 +43,6 @@ func (s *Session) CreateWebhook(name string, channelId Snowflake, avatar ...stri
 	err = ParseJsonFromHttpResponse(response, &webhook)
 
 	return &webhook, nil
-
 }
 
 
@@ -58,7 +59,6 @@ func (s *Session) GetWebhook(id Snowflake) (*Webhook, error) {
 	err = ParseJsonFromHttpResponse(response, &webhook)
 
 	return &webhook, nil
-
 }
 
 
@@ -75,8 +75,8 @@ func (s *Session) DeleteWebhook(id Snowflake) (*Webhook, error) {
 	err = ParseJsonFromHttpResponse(response, &webhook)
 
 	return &webhook, nil
-
 }
+
 
 func (s *Session) ExecuteWebhook(id Snowflake, token string, messageHook *WebhookMessage) error {
 
@@ -109,7 +109,6 @@ func (s *Session) GetChannelWebhooks(channelId Snowflake) (*[]Webhook, error) {
 	err = ParseJsonFromHttpResponse(response, &webhooks)
 
 	return &webhooks, nil
-
 }
 
 
@@ -126,6 +125,5 @@ func (s *Session) GetGuildWebhooks(guildId Snowflake) (*[]Webhook, error) {
 	err = ParseJsonFromHttpResponse(response, &webhooks)
 
 	return &webhooks, nil
-
 }
 
